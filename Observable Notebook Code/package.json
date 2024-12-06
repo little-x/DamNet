@@ -1,0 +1,14 @@
+{
+  "name": "acb4f89c6040069c",
+  "main": "acb4f89c6040069c@857.js",
+  "version": "857.0.0",
+  "homepage": "https://observablehq.com/d/acb4f89c6040069c",
+  "author": {
+    "name": "CSE-512",
+    "url": "https://observablehq.com/@datahackers"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}

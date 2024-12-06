@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive World Map</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: 1fr 8fr 1fr; /* Centering content */
+            grid-gap: 20px;
+            background-color: #f0f4f8; /* Bluish shade */
+        }
+
+        header {
+            grid-column: 1 / span 3;
+            background: linear-gradient(135deg, #56ccf2, #2f80ed); /* Light blue */
+            color: white;
+            padding: 20px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            right: -50%;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 100%);
+            animation: waterFlow 30s linear infinite;
+        }
+
+        @keyframes waterFlow {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(100%); }
+        }
+
+        header h1 {
+            position: relative;
+            margin-bottom: 7px;
+            font-size: 2.5em;
+            z-index: 1;
+        }
+
+        header h2 {
+            position: relative;
+            margin-top: 3px;
+            font-weight: bold;
+            font-size: 1.5em;
+            color: #ffffff;
+            z-index: 1;
+        }
+
+        header h4 {
+            position: relative;
+            margin-top: 10px;
+            z-index: 1;
+        }
+
+        #viz_info {
+            color: #333;
+            font-size: 18px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            text-align: justify;
+            grid-column: 2;
+            animation: fadeIn 2s ease;
+        }
+
+        iframe {
+            width: 100%;
+            height: 713px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            grid-column: 2;
+            animation: zoomIn 2s ease;
+        }
+
+        .source {
+            font-size: 0.9em;
+            font-style: italic;
+            margin-top: 10px;
+            grid-column: 2;
+            text-align: right;
+            animation: fadeIn 2s ease;
+        }
+
+        .source a {
+            color: #2f80ed;
+            text-decoration: none;
+        }
+
+        #writeup {
+            grid-column: 2;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #56ccf2;
+            animation: fadeIn 2s ease;
+        }
+
+        .writeup {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            grid-column: 2;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: justify;
+            animation: fadeIn 2s ease;
+        }
+
+        footer {
+            grid-column: 1 / span 3;
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 2s ease;
+        }
+
+        #footer_para {
+            margin-bottom: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>How Do Dams Connect the World's Waters?</h1>
+        <h2>DamNet : Visualize Global Dam Network</h2>
+        <h4>By EcoMappers</h4>
+    </header>
+    <p id="viz_info">Curious about how dams are interconnected and managing water globally? Explore this interactive map, where you can zoom in, zoom out, and drag to navigate. Hover over a dam to see its name and the river it spans at the bottom-right corner. You'll also see the dams it directly connects to. Click on a dam to toggle detailed information about it and view its entire network of influenced and influencing dams. Easily identify whether these connections are upstream (source of incoming water) or downstream (direction of outgoing water flow).</p>
+    <iframe frameborder="0"
+  src="https://observablehq.com/embed/acb4f89c6040069c@857?cells=viewof+selected_continent%2Cdam_visualization"></iframe>
+    <p class="source">Source: <a href="https://www.globaldamwatch.org/grand" target="_blank">Global Reservoir and Dam Database (GRanD)</a></p>
+    <h2 id="writeup">Write-up for the above interactive visualization</h2>
+    <div class="writeup">
+        <p>Our visualization aims to illuminate the complex network of connections among dams and the intricate dynamics of water flow between them, driven by the movement of water through rivers or canals. These connections are critical for preserving water quality, as contamination from upstream dams(often due to illegal dumping), can significantly impact downstream water quality. Knowledge of dam connections is also vital in disaster management, particularly during dam failures. Anticipating which dams may be affected downstream in such events is critical for swift and effective response measures, safeguarding communities and ecosystems. Additionally, these connections serve as vital backup water sources during periods of low water levels, further underscoring their importance in ensuring water security and resilience. The absence of a global dam network map emphasizes the importance of our visualization and the potential it has for researchers, policymakers, and stakeholders for decision-making and sustainable water resource management practices.</p>
+        <p>These dam connections have been computed as a part of research at UW using the <a href="https://www.globaldamwatch.org/grand" target="_blank">Global Reservoir and Dam (GRanD) Database</a> along with the <a href="https://www.umt.edu/numerical-terradynamic-simulation-group/project/drt.php" target="_blank"> global flow direction file</a>. This dataset is still under preparation and therefore there might be some nuances.</p>
+    </div>
+    <footer>
+        &copy; 2024 EcoMappers. All rights reserved.
+        <p id="footer_para">Team EcoMappers: Alyx, Pei-Hsin, and Sanchit</p>
+    </footer>
+</body>
+</html>
